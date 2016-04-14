@@ -1,0 +1,24 @@
+<div class="container">
+
+	<div class="row" >
+		<center><%= image_tag("hotel.svg", size: "150") %></center>
+
+		<%= form_for :hotel, url: hotels_path do|f| %>
+		<div class="input-field ">
+			<%= f.label :name, :id=>"name" %>
+			<%= f.text_field(:name) %>
+		</div>
+		<div>
+			<%= f.submit :class => 'waves-effect waves-light btn'%>
+		</div>
+
+		<% end %>
+
+   </div>
+
+</div>
+
+
+
+
+      
