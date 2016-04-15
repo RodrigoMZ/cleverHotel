@@ -3,13 +3,120 @@
 	<div class="row" >
 		<center><%= image_tag("hotel.svg", size: "150") %></center>
 
-		<%= form_for :hotel, url: hotels_path do|f| %>
+		<%= nested_form_for @hotel do|f| %>
 		<div class="input-field ">
 			<%= f.label :name, :id=>"name" %>
 			<%= f.text_field(:name) %>
 		</div>
+
+		<div class="input-field ">
+			<%= f.label :address, :id=>"address" %>
+			<%= f.text_field(:address) %>
+		</div>
+
+		<div class="input-field ">
+			<%= f.label :city, :id=>"city" %>
+			<%= f.text_field(:city) %>
+		</div>
+
+		<div class="input-field ">
+			<%= f.label :country, :id=>"country" %>
+			<%= f.text_field(:country) %>
+		</div>
+
+		<div class="input-field">
+			<%= f.label :postcode, :id=>"postcode" %>
+			<%= f.text_field(:postcode) %>
+		</div>
+
+		<div><%= f.label :area_type %></div>
+		<div class="input-field">
+
+			<% Hotel::AREA_TYPE.each do |area| %>
+
+				<%= f.radio_button :area_type, area, id: area, class: "with-gap" %>
+	      <label for="<%= area %>"><%= area %></label>
+	      &nbsp;&nbsp;
+
+	   <% end %>
+		</div><br><br>
+
+		<div><%= f.label :hotel_type %></div>
+		<div class="input-field">
+			<% Hotel::HOTEL_TYPE.each do |hotel| %>
+				<%= f.radio_button :hotel_type, hotel, id: hotel, class: "with-gap" %>
+	      <label for="<%= hotel %>"><%= hotel %></label>
+	      &nbsp;&nbsp;
+	   <% end %>
+		</div>
+
 		<div>
-			<%= f.submit :class => 'waves-effect waves-light btn'%>
+			<%= f.label :language, :id=>"language" %>
+			<%= f.fields_for :languages do |n| %>
+				<div class="input-field">
+					<%= n.label :url, :id=>"url" %>
+					<%= n.text_field :url %>
+				</div>
+				<div class="input-field">
+					<%= n.label :language_code, :id=>"language_code" %>
+					<%= n.text_field :language_code %>
+				</div>
+				<div class="input-field">
+					<%= n.label :price, :id=>"price" %>
+					<%= n.text_field :price %>
+				</div>
+			  <%= n.link_to_remove "Remove this language" %>
+			<% end %>
+		</div>
+
+		<div>
+			<p><%= f.link_to_add "Add a language", :languages %></p>
+		</div>
+
+		<div class="input-field">
+			<%= f.label :neighborhood, :id=>"neighborhood" %>
+			<%= f.fields_for :neighborhoods do |n| %>
+				<%= n.text_field :name %>
+			  <%= n.link_to_remove "Remove this neighborhood" %>
+			<% end %>
+		</div>
+		<div>
+			<p><%= f.link_to_add "Add a neighborhood", :neighborhoods %></p>
+		</div>
+
+		<div class="input-field">
+			<%= f.label :poi, :id=>"poi" %>
+			<%= f.fields_for :pois do |n| %>
+				<%= n.text_field :name %>
+			  <%= n.link_to_remove "Remove this poi" %>
+			<% end %>
+		</div>
+		<div>
+			<p><%= f.link_to_add "Add a poi", :pois %></p>
+		</div>
+
+		<div class="file-field input-field">
+      <div class="btn">
+        <span>Logo</span>
+        <%= f.file_field :logo, name: "images[logo]" %>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>Images</span>
+        <%= f.file_field :picture, multiple: true, name: "images[picture][]" %>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload one or more files">
+      </div>
+    </div>
+
+		<div class="input-field">
+			<%= f.submit  :class => 'waves-effect waves-light btn'%>
 		</div>
 
 		<% end %>
@@ -21,4 +128,4 @@
 
 
 
-      
+
