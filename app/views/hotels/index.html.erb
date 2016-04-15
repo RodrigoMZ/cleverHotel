@@ -9,20 +9,30 @@
         <a id="add_button" href="/hotels/new" class="btn-floating btn-large waves-effect waves-light red right"><i class="material-icons">add</i></a>
       </div>
     </div>
-     
+
     <table class="striped z-depth-2">
       <thead>
         <tr>
           <th data-field="id">Logo</th>
           <th data-field="name">Name</th>
+          <th data-field="name">Address</th>
+          <th data-field="name">City</th>
+          <th data-field="name">Country</th>
+          <th data-field="name">Area Type</th>
+          <th data-field="name">Hotel Type</th>
         </tr>
       </thead>
 
       <tbody>
         <% @hotels.each do |hotel| %>
         <tr>
-          <td><%= hotel.id %></td>
+          <td><%= image_tag hotel.images.first.logo_url(:thumb), class: "circle responsive-img" if hotel.images && hotel.images.first %></td>
           <td><%= hotel.name %></td>
+          <td><%= hotel.address %></td>
+          <td><%= hotel.city %></td>
+          <td><%= hotel.country %></td>
+          <td><%= hotel.area_type %></td>
+          <td><%= hotel.hotel_type %></td>
         </tr>
         <% end %>
       </tbody>

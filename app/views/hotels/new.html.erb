@@ -51,7 +51,6 @@
 		</div>
 
 		<div>
-			<%= f.label :language, :id=>"language" %>
 			<%= f.fields_for :languages do |n| %>
 				<div class="input-field">
 					<%= n.label :url, :id=>"url" %>
@@ -65,34 +64,48 @@
 					<%= n.label :price, :id=>"price" %>
 					<%= n.text_field :price %>
 				</div>
-			  <%= n.link_to_remove "Remove this language" %>
+			  <%= n.link_to_remove class: "btn-floating disabled" do %>
+			  	<i class="material-icons">remove</i>
+			  <% end %>
 			<% end %>
 		</div>
 
 		<div>
-			<p><%= f.link_to_add "Add a language", :languages %></p>
+			<%= f.label :language, :id=>"language" %>
+			<p><%= f.link_to_add :languages, class: "btn-floating disabled" do %>
+				<i class="material-icons">add</i>
+			<% end %>
+			</p>
 		</div>
 
 		<div class="input-field">
-			<%= f.label :neighborhood, :id=>"neighborhood" %>
 			<%= f.fields_for :neighborhoods do |n| %>
 				<%= n.text_field :name %>
-			  <%= n.link_to_remove "Remove this neighborhood" %>
+			  <%= n.link_to_remove class: "btn-floating disabled" do %>
+			  	<i class="material-icons">remove</i>
+			  <% end %>
 			<% end %>
 		</div>
 		<div>
-			<p><%= f.link_to_add "Add a neighborhood", :neighborhoods %></p>
+			<%= f.label :neighborhood, :id=>"neighborhood" %>
+			<p><%= f.link_to_add :neighborhoods, class: "btn-floating disabled" do %>
+				<i class="material-icons">add</i>
+			<% end %></p>
 		</div>
 
 		<div class="input-field">
-			<%= f.label :poi, :id=>"poi" %>
 			<%= f.fields_for :pois do |n| %>
 				<%= n.text_field :name %>
-			  <%= n.link_to_remove "Remove this poi" %>
+			  <%= n.link_to_remove class: "btn-floating disabled" do %>
+			  	<i class="material-icons">remove</i>
+			  <% end %>
 			<% end %>
 		</div>
 		<div>
-			<p><%= f.link_to_add "Add a poi", :pois %></p>
+			<%= f.label :poi, :id=>"poi" %>
+			<p><%= f.link_to_add :pois, class: "btn-floating disabled" do %>
+				<i class="material-icons">add</i>
+			<% end %></p>
 		</div>
 
 		<div class="file-field input-field">

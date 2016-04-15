@@ -8,12 +8,15 @@ class HotelsController < ApplicationController
 		@hotel = Hotel.new(hotel_params)
 		@hotel.save
 		respond_to do |format|
-     if @hotel.save
+     if @hotel.save && params[:images]['picture']
         params[:images]['picture'].each do |pic|
           @hotel.images.create!(:picture => pic)
         end
         @hotel.images.first.update_attributes(:logo => params[:images]['logo'])
         format.html { redirect_to @hotel, notice: 'Post was successfully created.' }
+     elsif !params[:images]['picture'].present? && @hotel.save
+     		@hotel.images.create!(:logo => params[:images]['logo'])
+     		format.html { redirect_to @hotel, notice: 'Post was successfully created.' }
      else
        format.html { render action: 'new' }
      end
