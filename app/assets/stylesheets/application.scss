@@ -18,3 +18,13 @@
 @import "materialize/components/color";
 $primary-color: color("blue", "lighten-2") !default;
 @import "materialize";
+
+div.result {
+  width: 200px; /* or whatever */
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+div.inline {
+  display: inline-block;
+}

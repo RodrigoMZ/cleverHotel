@@ -13,10 +13,10 @@ class HotelsController < ApplicationController
           @hotel.images.create!(:picture => pic)
         end
         @hotel.images.first.update_attributes(:logo => params[:images]['logo'])
-        format.html { redirect_to @hotel, notice: 'Post was successfully created.' }
+        format.html { redirect_to hotels_path, notice: 'Post was successfully created.' }
      elsif !params[:images]['picture'].present? && @hotel.save
      		@hotel.images.create!(:logo => params[:images]['logo'])
-     		format.html { redirect_to @hotel, notice: 'Post was successfully created.' }
+     		format.html { redirect_to hotels_path, notice: 'Post was successfully created.' }
      else
        format.html { render action: 'new' }
      end

@@ -111,11 +111,16 @@
 		<div class="file-field input-field">
       <div class="btn">
         <span>Logo</span>
-        <%= f.file_field :logo, name: "images[logo]" %>
+        <%= f.file_field :logo, name: "images[logo]", id: "inputFile" %>
+
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
       </div>
+    </div>
+
+    <div>
+    	<img id= "image_upload_preview">
     </div>
 
     <div class="file-field input-field">
@@ -127,6 +132,8 @@
         <input class="file-path validate" type="text" placeholder="Upload one or more files">
       </div>
     </div>
+
+    <div><output id="result" /></div>
 
 		<div class="input-field">
 			<%= f.submit  :class => 'waves-effect waves-light btn'%>
