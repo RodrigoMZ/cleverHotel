@@ -6,6 +6,14 @@
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  address    :string
+#  city       :string
+#  country    :string
+#  postcode   :string
+#  area_type  :string
+#  hotel_type :string
+#  latitude   :string
+#  longitude  :string
 #
 
 class Hotel < ActiveRecord::Base
