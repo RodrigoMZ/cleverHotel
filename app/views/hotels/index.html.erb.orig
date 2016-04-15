@@ -12,9 +12,14 @@
         <a id="add_button" href="/hotels/new" class="btn-floating btn-large waves-effect waves-light red right"><i class="material-icons">add</i></a>
       </div>
     </div>
+<<<<<<< HEAD
     
    
     <table class="striped  z-depth-1">
+=======
+
+    <table class="striped z-depth-2">
+>>>>>>> 5b0fe2a981b645ab3157946eb0ce90757d0ef897
       <thead>
         <tr>
           <th data-field="id">Logo</th>

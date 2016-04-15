@@ -9,4 +9,17 @@
 #
 
 class Hotel < ActiveRecord::Base
+
+  has_many :images
+  has_many :languages
+  has_many :neighborhoods
+  has_many :pois
+
+  accepts_nested_attributes_for :neighborhoods
+  accepts_nested_attributes_for :pois
+  accepts_nested_attributes_for :languages
+  accepts_nested_attributes_for :images
+
+  AREA_TYPE = ["Urban", "Beach", "Ski", "Rural"]
+  HOTEL_TYPE = ["Hotel", "Apartment", "Hostal"]
 end

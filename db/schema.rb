@@ -11,12 +11,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413154731) do
+ActiveRecord::Schema.define(version: 20160414112526) do
 
   create_table "hotels", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "address"
+    t.string   "city"
+    t.string   "country"
+    t.string   "postcode"
+    t.string   "area_type"
+    t.string   "hotel_type"
+    t.string   "latitude"
+    t.string   "longitude"
   end
+
+  create_table "images", force: :cascade do |t|
+    t.integer  "hotel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "picture"
+    t.string   "logo"
+  end
+
+  add_index "images", ["hotel_id"], name: "index_images_on_hotel_id"
+
+  create_table "languages", force: :cascade do |t|
+    t.integer "hotel_id"
+    t.string  "url",                                   null: false
+    t.string  "language_code",                         null: false
+    t.decimal "price",         precision: 8, scale: 2
+  end
+
+  add_index "languages", ["hotel_id"], name: "index_languages_on_hotel_id"
+
+  create_table "neighborhoods", force: :cascade do |t|
+    t.integer  "hotel_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "neighborhoods", ["hotel_id"], name: "index_neighborhoods_on_hotel_id"
+
+  create_table "pois", force: :cascade do |t|
+    t.integer  "hotel_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "pois", ["hotel_id"], name: "index_pois_on_hotel_id"
 
 end

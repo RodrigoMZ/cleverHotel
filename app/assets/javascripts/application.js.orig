@@ -14,7 +14,10 @@
 //= require jquery_ujs
 //= require materialize-sprockets
 //= require turbolinks
-//= require jquery_nested_form
+<<<<<<< HEAD
 //= require underscore
 //= require gmaps/google
+=======
+//= require jquery_nested_form
+>>>>>>> 5b0fe2a981b645ab3157946eb0ce90757d0ef897
 //= require_tree .
