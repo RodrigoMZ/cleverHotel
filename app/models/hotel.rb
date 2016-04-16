@@ -30,4 +30,12 @@ class Hotel < ActiveRecord::Base
 
   AREA_TYPE = ["Urban", "Beach", "Ski", "Rural"]
   HOTEL_TYPE = ["Hotel", "Apartment", "Hostal"]
+
+
+  after_create :get_lat_long
+
+  def get_lat_long
+    points = Geocoder.coordinates(self.address)
+    self.update_attributes(latitude: points[0], longitude: points[1])
+  end
 end
