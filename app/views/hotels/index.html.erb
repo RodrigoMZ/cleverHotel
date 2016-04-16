@@ -24,12 +24,13 @@
           <th data-field="name">Country</th>
           <th data-field="name">Area Type</th>
           <th data-field="name">Hotel Type</th>
+          <th data-field="name">Delete Hotel</th>
         </tr>
       </thead>
 
       <tbody>
         <% @hotels.each do |hotel| %>
-        <tr>
+        <tr id="hotel_<%= hotel.id %>">
           <td><%= image_tag hotel.images.first.logo_url(:thumb), class: "circle responsive-img" if hotel.images && hotel.images.first %></td>
           <td><%= hotel.name %></td>
           <td><%= hotel.address %></td>
@@ -37,6 +38,8 @@
           <td><%= hotel.country %></td>
           <td><%= hotel.area_type %></td>
           <td><%= hotel.hotel_type %></td>
+          <td><%= link_to "Delete", hotel_path(hotel), method: :delete, remote: true %>
+          </td>
         </tr>
         <% end %>
       </tbody>
