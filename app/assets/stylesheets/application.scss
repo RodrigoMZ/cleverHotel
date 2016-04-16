@@ -28,3 +28,13 @@ div.result {
 div.inline {
   display: inline-block;
 }
+.remove_pict{
+	position: relative;
+    left: -15px;
+    top: -86px;
+    z-index: 3;
+    font-weight: bold;
+    color: red;
+    font-size: large;
+}
+

@@ -47,7 +47,7 @@ $(document).ready(function(){
                     div.className = 'inline';
 
                     div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
-                            "title='" + picFile.name + "' style='height:100px;width:100px;'/> <a href='#' class='remove_pict'>X</a>";
+                            "title='" + picFile.name + "' style='height:100px;width:100px;'/> <a href='#' class='remove_pict'>x</a>";
 
                     output.insertBefore(div,null);
                     div.children[1].addEventListener("click", function(event){

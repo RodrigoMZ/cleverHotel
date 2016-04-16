@@ -8,65 +8,70 @@
 			<%= f.label :name, :id=>"name" %>
 			<%= f.text_field(:name) %>
 		</div>
-
 		<div class="input-field ">
 			<%= f.label :address, :id=>"address" %>
 			<%= f.text_field(:address) %>
 		</div>
-
-		<div class="input-field ">
-			<%= f.label :city, :id=>"city" %>
-			<%= f.text_field(:city) %>
+		<div class="row">
+			<div class="col s4">
+				<div class="input-field ">
+					<%= f.label :city, :id=>"city" %>
+					<%= f.text_field(:city) %>
+				</div>
+			</div>
+			<div class="col s4">
+				<div class="input-field ">
+					<%= f.label :country, :id=>"country" %>
+					<%= f.text_field(:country) %>
+				</div>
+			</div>
+			<div class="col s4">
+				<div class="input-field">
+					<%= f.label :postcode, :id=>"postcode" %>
+					<%= f.text_field(:postcode) %>
+				</div>
+			</div>
 		</div>
 
-		<div class="input-field ">
-			<%= f.label :country, :id=>"country" %>
-			<%= f.text_field(:country) %>
+		<div class="row">
+			<div class="col s6">
+				<div><%= f.label :area_type %></div>
+				<div class="input-field">
+					<% Hotel::AREA_TYPE.each do |area| %>
+					<%= f.radio_button :area_type, area, id: area, class: "with-gap", :checked => area == 'Urban' %>
+					<label for="<%= area %>"><%= area %></label> &nbsp;&nbsp;
+					<% end %>
+				</div>
+			</div>
+			<div class="col s6">
+				<div><%= f.label :hotel_type %></div>
+				<div class="input-field">
+					<% Hotel::HOTEL_TYPE.each do |hotel| %>
+					<%= f.radio_button :hotel_type, hotel, id: hotel, class: "with-gap", :checked => hotel == 'Hotel' %>
+					<label for="<%= hotel %>"><%= hotel %></label>&nbsp;&nbsp; 
+					<% end %>
+				</div>
+			</div>
 		</div>
 
-		<div class="input-field">
-			<%= f.label :postcode, :id=>"postcode" %>
-			<%= f.text_field(:postcode) %>
-		</div>
-
-		<div><%= f.label :area_type %></div>
-		<div class="input-field">
-
-			<% Hotel::AREA_TYPE.each do |area| %>
-
-				<%= f.radio_button :area_type, area, id: area, class: "with-gap" %>
-	      <label for="<%= area %>"><%= area %></label>
-	      &nbsp;&nbsp;
-
-	   <% end %>
-		</div><br><br>
-
-		<div><%= f.label :hotel_type %></div>
-		<div class="input-field">
-			<% Hotel::HOTEL_TYPE.each do |hotel| %>
-				<%= f.radio_button :hotel_type, hotel, id: hotel, class: "with-gap" %>
-	      <label for="<%= hotel %>"><%= hotel %></label>
-	      &nbsp;&nbsp;
-	   <% end %>
-		</div>
 
 		<div>
 			<%= f.fields_for :languages do |n| %>
-				<div class="input-field">
-					<%= n.label :url, :id=>"url" %>
-					<%= n.text_field :url %>
-				</div>
-				<div class="input-field">
-					<%= n.label :language_code, :id=>"language_code" %>
-					<%= n.text_field :language_code %>
-				</div>
-				<div class="input-field">
-					<%= n.label :price, :id=>"price" %>
-					<%= n.text_field :price %>
-				</div>
-			  <%= n.link_to_remove class: "btn-floating disabled" do %>
-			  	<i class="material-icons">remove</i>
-			  <% end %>
+			<div class="input-field">
+				<%= n.label :url, :id=>"url" %>
+				<%= n.text_field :url %>
+			</div>
+			<div class="input-field">
+				<%= n.label :language_code, :id=>"language_code" %>
+				<%= n.text_field :language_code %>
+			</div>
+			<div class="input-field">
+				<%= n.label :price, :id=>"price" %>
+				<%= n.text_field :price %>
+			</div>
+			<%= n.link_to_remove class: "btn-floating disabled" do %>
+			<i class="material-icons">remove</i>
+			<% end %>
 			<% end %>
 		</div>
 
@@ -74,76 +79,76 @@
 			<%= f.label :language, :id=>"language" %>
 			<p><%= f.link_to_add :languages, class: "btn-floating disabled" do %>
 				<i class="material-icons">add</i>
-			<% end %>
+				<% end %>
 			</p>
 		</div>
 
 		<div class="input-field">
 			<%= f.fields_for :neighborhoods do |n| %>
-				<%= n.text_field :name %>
-			  <%= n.link_to_remove class: "btn-floating disabled" do %>
-			  	<i class="material-icons">remove</i>
-			  <% end %>
+			<%= n.text_field :name %>
+			<%= n.link_to_remove class: "btn-floating disabled" do %>
+			<i class="material-icons">remove</i>
+			<% end %>
 			<% end %>
 		</div>
 		<div>
 			<%= f.label :neighborhood, :id=>"neighborhood" %>
 			<p><%= f.link_to_add :neighborhoods, class: "btn-floating disabled" do %>
 				<i class="material-icons">add</i>
-			<% end %></p>
-		</div>
+				<% end %></p>
+			</div>
 
-		<div class="input-field">
-			<%= f.fields_for :pois do |n| %>
+			<div class="input-field">
+				<%= f.fields_for :pois do |n| %>
 				<%= n.text_field :name %>
-			  <%= n.link_to_remove class: "btn-floating disabled" do %>
-			  	<i class="material-icons">remove</i>
-			  <% end %>
-			<% end %>
+				<%= n.link_to_remove class: "btn-floating disabled" do %>
+				<i class="material-icons">remove</i>
+				<% end %>
+				<% end %>
+			</div>
+			<div>
+				<%= f.label :poi, :id=>"poi" %>
+				<p><%= f.link_to_add :pois, class: "btn-floating disabled" do %>
+					<i class="material-icons">add</i>
+					<% end %></p>
+				</div>
+
+				<div class="file-field input-field">
+					<div class="btn">
+						<span>Logo</span>
+						<%= f.file_field :logo, name: "images[logo]", id: "inputFile" %>
+
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text">
+					</div>
+				</div>
+
+				<div>
+					<img id= "image_upload_preview">
+				</div>
+
+				<div class="file-field input-field">
+					<div class="btn">
+						<span>Images</span>
+						<%= f.file_field :picture, multiple: true, name: "images[picture][]" %>
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text" placeholder="Upload one or more files">
+					</div>
+				</div>
+				<div><output id="result" /></div>
+				<center>
+				
+				<div class="input-field">
+					<%= f.submit  :class => 'waves-effect waves-light btn'%>
+				</div>
+				</center>
+				<% end %>
+
+			</div>
+
 		</div>
-		<div>
-			<%= f.label :poi, :id=>"poi" %>
-			<p><%= f.link_to_add :pois, class: "btn-floating disabled" do %>
-				<i class="material-icons">add</i>
-			<% end %></p>
-		</div>
-
-		<div class="file-field input-field">
-      <div class="btn">
-        <span>Logo</span>
-        <%= f.file_field :logo, name: "images[logo]", id: "inputFile" %>
-
-      </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
-      </div>
-    </div>
-
-    <div>
-    	<img id= "image_upload_preview">
-    </div>
-
-    <div class="file-field input-field">
-      <div class="btn">
-        <span>Images</span>
-        <%= f.file_field :picture, multiple: true, name: "images[picture][]" %>
-      </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text" placeholder="Upload one or more files">
-      </div>
-    </div>
-
-    <div><output id="result" /></div>
-
-		<div class="input-field">
-			<%= f.submit  :class => 'waves-effect waves-light btn'%>
-		</div>
-
-		<% end %>
-
-   </div>
-
-</div>
 
 
 
