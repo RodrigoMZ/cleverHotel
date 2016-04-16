@@ -54,7 +54,6 @@
 			</div>
 		</div>
 
-
 		<div>
 			<%= f.fields_for :languages do |n| %>
 			<div class="input-field">
@@ -75,13 +74,19 @@
 			<% end %>
 		</div>
 
-		<div>
-			<%= f.label :language, :id=>"language" %>
-			<p><%= f.link_to_add :languages, class: "btn-floating disabled" do %>
+		<div class="row">
+	      <div class="col s2">
+	      <div class="valign-wrapper">
+			  <h5 class="valign"><%= f.label :language, :id=>"language" %></h5>
+		  </div>
+	      </div>
+	      <div class="col s8">
+	      	<p><%= f.link_to_add :languages, class: "btn-floating" do %>
 				<i class="material-icons">add</i>
 				<% end %>
 			</p>
-		</div>
+	      </div>
+	    </div>
 
 		<div class="input-field">
 			<%= f.fields_for :neighborhoods do |n| %>
@@ -91,27 +96,42 @@
 			<% end %>
 			<% end %>
 		</div>
-		<div>
-			<%= f.label :neighborhood, :id=>"neighborhood" %>
-			<p><%= f.link_to_add :neighborhoods, class: "btn-floating disabled" do %>
+		<div class="row">
+	      <div class="col s2">
+	      <div class="valign-wrapper">
+			  <h5 class="valign"><%= f.label :neighborhood, :id=>"neighborhood" %></h5>
+		  </div>
+	      </div>
+	      <div class="col s8">
+	      	<p><%= f.link_to_add :neighborhoods, class: "btn-floating" do %>
 				<i class="material-icons">add</i>
-				<% end %></p>
-			</div>
+				<% end %>
+			</p>
+	      </div>
+	    </div>
 
-			<div class="input-field">
-				<%= f.fields_for :pois do |n| %>
-				<%= n.text_field :name %>
-				<%= n.link_to_remove class: "btn-floating disabled" do %>
-				<i class="material-icons">remove</i>
+		<div class="input-field">
+			<%= f.fields_for :pois do |n| %>
+			<%= n.text_field :name %>
+			<%= n.link_to_remove class: "btn-floating disabled" do %>
+			<i class="material-icons">remove</i>
+			<% end %>
+			<% end %>
+		</div>
+		<div class="row">
+	      <div class="col s2">
+	      <div class="valign-wrapper">
+			  <h5 class="valign"><%= f.label :poi, :id=>"poi" %></h5>
+		  </div>
+	      </div>
+	      <div class="col s8">
+	      	<p><%= f.link_to_add :pois, class: "btn-floating" do %>
+				<i class="material-icons">add</i>
 				<% end %>
-				<% end %>
-			</div>
-			<div>
-				<%= f.label :poi, :id=>"poi" %>
-				<p><%= f.link_to_add :pois, class: "btn-floating disabled" do %>
-					<i class="material-icons">add</i>
-					<% end %></p>
-				</div>
+			</p>
+	      </div>
+	    </div>
+
 
 				<div class="file-field input-field">
 					<div class="btn">
