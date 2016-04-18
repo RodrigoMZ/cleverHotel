@@ -11,12 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414112526) do
+ActiveRecord::Schema.define(version: 20160418154052) do
+
+  create_table "ads", force: :cascade do |t|
+    t.integer  "hotel_id"
+    t.string   "text",        null: false
+    t.string   "combination", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "ads", ["hotel_id"], name: "index_ads_on_hotel_id"
 
   create_table "hotels", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "address"
     t.string   "city"
     t.string   "country"
@@ -25,6 +35,11 @@ ActiveRecord::Schema.define(version: 20160414112526) do
     t.string   "hotel_type"
     t.string   "latitude"
     t.string   "longitude"
+    t.decimal  "price_from"
+    t.decimal  "price_high_season"
+    t.boolean  "wifi"
+    t.boolean  "pool"
+    t.integer  "stars"
   end
 
   create_table "images", force: :cascade do |t|
@@ -39,9 +54,8 @@ ActiveRecord::Schema.define(version: 20160414112526) do
 
   create_table "languages", force: :cascade do |t|
     t.integer "hotel_id"
-    t.string  "url",                                   null: false
-    t.string  "language_code",                         null: false
-    t.decimal "price",         precision: 8, scale: 2
+    t.string  "url",           null: false
+    t.string  "language_code", null: false
   end
 
   add_index "languages", ["hotel_id"], name: "index_languages_on_hotel_id"

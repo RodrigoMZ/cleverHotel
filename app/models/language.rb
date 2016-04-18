@@ -6,7 +6,6 @@
 #  hotel_id      :integer
 #  url           :string           not null
 #  language_code :string           not null
-#  price         :decimal(8, 2)
 #
 
 class Language < ActiveRecord::Base
