@@ -3,14 +3,14 @@
     <div class="container">
       <br>
       <div class="valign-wrapper header purple-text">
-        <div class="header purple-text"> 
+        <div class="header purple-text">
 
           <h5 class="valign">Customize your Ad</h5>
         </div>
       </div>
 
       <br>
-      <div class="row"> 
+      <div class="row">
 
           <% @ads.each_with_index do |ad, index| %>
             <div class="col s10">
@@ -18,11 +18,11 @@
                 <input type="checkbox" id=<%="ad_#{index}"%> checked="checked" />
                 <label for=<%="ad_#{index}"%> ><%= ad[:text]%></label>
               </p>
-            </div>  
+            </div>
           <% end %>
-      
+
       </div>
-    <a class="waves-effect waves-light btn">Done</a>
+    <%= link_to "Done", hotels_path, class: "waves-effect waves-light btn" %>
     </div>
 
   </div>

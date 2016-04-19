@@ -6,17 +6,16 @@ class HotelsController < ApplicationController
 
 	def create
 		@hotel = Hotel.new(hotel_params)
-		@hotel.save
+    @hotel.save
 		respond_to do |format|
-     if @hotel.save && params[:images]['picture']
+     if @hotel.save && params[:images]['picture'] && params[:images]
         params[:images]['picture'].each do |pic|
           @hotel.images.create!(:picture => pic)
         end
         @hotel.images.first.update_attributes(:logo => params[:images]['logo'])
-        format.html { redirect_to hotels_path, notice: 'Post was successfully created.' }
-     elsif !params[:images]['picture'].present? && @hotel.save
+        format.html { redirect_to ads_path( hotel: @hotel.id )}
+     elsif params[:images] && !params[:images]['picture'].present? && @hotel.save
      		@hotel.images.create!(:logo => params[:images]['logo'])
-     		#format.html { redirect_to hotels_path, notice: 'Post was successfully created.' }
      		format.html { redirect_to ads_path( hotel: @hotel.id ) }
      else
        format.html { render action: 'new' }
@@ -46,6 +45,11 @@ class HotelsController < ApplicationController
 			:postcode,
 			:area_type,
 			:hotel_type,
+      :wifi,
+      :pool,
+      :price_from,
+      :price_high_season,
+      :stars,
 			images: [:logo, :picture, :_destroy],
 			neighborhoods_attributes: [:name, :_destroy],
 			pois_attributes: [:name, :_destroy],

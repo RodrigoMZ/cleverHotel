@@ -28,7 +28,7 @@ class Hotel < ActiveRecord::Base
   has_many :neighborhoods
   has_many :pois
   has_many :ads
-  
+
   accepts_nested_attributes_for :neighborhoods
   accepts_nested_attributes_for :pois
   accepts_nested_attributes_for :languages
@@ -40,8 +40,25 @@ class Hotel < ActiveRecord::Base
 
   after_create :get_lat_long
 
+  #validations
+  validates :name, presence: true
+  validates :address, presence: true
+  validates :city, presence: true
+  validates :country, presence: true
+  validates :postcode, presence: true
+  validates :price_from, presence: true, :numericality => {:allow_blank => true}
+  validates :price_high_season, presence: true, :numericality => {:allow_blank => true}
+  validate :must_have_language
+
+
   def get_lat_long
     points = Geocoder.coordinates(self.address + "," + self.city + "," + self.country)
-    self.update_attributes(latitude: points[0], longitude: points[1])
+    self.update_attributes(latitude: points[0], longitude: points[1]) unless points.nil?
+  end
+
+  def must_have_language
+    if self.languages.count <= 1
+      self.errors.add(:languages, 'must have at least one language')
+    end
   end
 end

@@ -4,16 +4,26 @@
 	}
 </style>
 <script type="text/javascript">
+
 	$(function () {
- 
-	$("#rateYo").rateYo({
-	    rating: 4,
-	    fullStar: true
-	  });
+		$("#rateYo").rateYo({
+		    rating: 4,
+		    fullStar: true
+		  });
+		$("#new_hotel").on("submit", function(){
+			$("#hotel_stars").val($("#rateYo").rateYo("rating"));
+		});
+		$(".hotel_type").on("change", function(){
+	    if($(this).val() == "Hotel"){
+	      $('#stars').show();
+	    }else{
+	      $('#stars').hide();
+	    }
+  	});
 	});
 </script>
 <div class="container">
-	
+
 	<div class="row" >
 		<%= image_tag("hotel.svg", size: "100") %>
 
@@ -21,28 +31,33 @@
 		<div class="input-field ">
 			<%= f.label :name, 'Accommodation Name', :id=>"name" %>
 			<%= f.text_field(:name) %>
+			<p class='error'><%= show_errors(@hotel, :name) %></p>
 		</div>
 		<div class="input-field ">
 			<%= f.label :address, 'Address', :id=>"address" %>
 			<%= f.text_field(:address) %>
+			<p class='error'><%= show_errors(@hotel, :address) %></p>
 		</div>
 		<div class="row">
 			<div class="col s4">
 				<div class="input-field ">
 					<%= f.label :city, :id=>"city" %>
 					<%= f.text_field(:city) %>
+					<p class='error'><%= show_errors(@hotel, :city) %></p>
 				</div>
 			</div>
 			<div class="col s4">
 				<div class="input-field ">
 					<%= f.label :country, :id=>"country" %>
 					<%= f.text_field(:country) %>
+					<p class='error'><%= show_errors(@hotel, :country) %></p>
 				</div>
 			</div>
 			<div class="col s4">
 				<div class="input-field">
 					<%= f.label :postcode, :id=>"postcode" %>
 					<%= f.text_field(:postcode) %>
+					<p class='error'><%= show_errors(@hotel, :postcode) %></p>
 				</div>
 			</div>
 		</div>
@@ -53,8 +68,8 @@
 				<div><%= f.label :hotel_type, 'Type', :class=>'title_label white-text'  %></div>
 				<div class="input-field">
 					<% Hotel::HOTEL_TYPE.each do |hotel| %>
-					<%= f.radio_button :hotel_type, hotel, id: hotel, class: "with-gap ", :checked => hotel == 'Hotel' %>
-					<label for="<%= hotel %>" class="white-text"><%= hotel %></label>&nbsp;&nbsp; 
+					<%= f.radio_button :hotel_type, hotel, id: hotel, class: "with-gap hotel_type", :checked => hotel == 'Hotel' %>
+					<label for="<%= hotel %>" class="white-text"><%= hotel %></label>&nbsp;&nbsp;
 					<% end %>
 				</div>
 			</div>
@@ -71,12 +86,13 @@
 
 		</div>
 		<div class="row">
-	
+
 			<div class=" col s3 offset-s1">
 				<div class="input-field ">
 				    <i class="material-icons prefix">euro_symbol</i>
 					<%= f.label :price_from, 'Prices starts from', :id=>"price_from" %>
 					<%= f.text_field(:price_from) %>
+					<p class='error'><%= show_errors(@hotel, :price_from) %></p>
 				</div>
 			</div>
 			<div class=" col s3">
@@ -84,33 +100,33 @@
 				    <i class="material-icons prefix">euro_symbol</i>
 					<%= f.label :price_high_season, 'Average price in high season', :id=>"price_high_season" %>
 					<%= f.text_field(:price_high_season) %>
+					<p class='error'><%= show_errors(@hotel, :price_high_season) %></p>
 				</div>
 			</div>
-			<div class=" col s3">
-			<label>Stars</label>
+			<div class=" col s3" id="stars">
+				<label>Stars</label>
 				<div id="rateYo"></div>
+				<%= f.hidden_field :stars %>
 			</div>
 		</div>
 
 		<div>
 			<%= f.fields_for :languages do |n| %>
-			<div class="row">
-				<div class=" col s2 input-field">
-					<%= n.label :language_code, :id=>"language_code" %>
-					<%= n.text_field :language_code %>
+				<div class="row">
+					<div class=" col s2 input-field">
+						<%= n.label :language_code, :id=>"language_code" %>
+						<%= n.text_field :language_code %>
+					</div>
+					<div class=" col s5 input-field">
+						<%= n.label :url, 'Landing Page', :id=>"url" %>
+						<%= n.text_field :url %>
+					</div>
+					<div class=" col s1" style="margin-top: 2%;">
+						<%= n.link_to_remove class: "btn-floating disabled" do %>
+						<i class="material-icons">remove</i>
+						<% end %>
+					</div>
 				</div>
-				<div class=" col s5 input-field">
-					<%= n.label :url, 'Landing Page', :id=>"url" %>
-					<%= n.text_field :url %>
-				</div>
-				<div class=" col s1" style="margin-top: 2%;">
-					<%= n.link_to_remove class: "btn-floating disabled" do %>
-					<i class="material-icons">remove</i>
-					<% end %>	
-				</div>
-
-			</div>
-
 			<% end %>
 		</div>
 
@@ -126,6 +142,11 @@
 					<% end %>
 				</p>
 			</div>
+
+		</div>
+
+		<div class="input-field">
+			<p class='error'><%= show_errors(@hotel, :languages) %></p>
 		</div>
 
 		<div class="input-field">
@@ -191,19 +212,20 @@
 	              <span class="card-title">Amenities</span>
 	              <div class="row">
 	              <div class="col s3 offset-s3">
-				      <input type="checkbox" id="wifi" checked="" />
-				      <label for="wifi" class="white-text" >Free Wifi</label>
+
+				      <%= f.check_box :wifi %>
+				      <label for="hotel_wifi" class="white-text" >Free Wifi</label>
 				  </div>
 				  <div class="col s3">
-		              <input type="checkbox" id="pool" />
-		              <label for="pool" class="white-text" >Swiming Pool</label>
+		              <%= f.check_box :pool %>
+		              <label for="hotel_pool" class="white-text" >Swiming Pool</label>
 		          </div>
 		          </div>
 	            </div>
-	            
+
 	          </div>
 	        </div>
-			
+
 		</div>
 
 		<div class="file-field input-field">
@@ -247,5 +269,12 @@
 
 
 
-
+<script type="text/javascript">
+	$(document).ready(function(){
+	  $("#inputFile").change(function () {
+	    readURL(this);
+	  });
+		multi_images_preview()
+	})
+</script>>
 

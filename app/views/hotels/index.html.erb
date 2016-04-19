@@ -19,7 +19,7 @@
       <div class="col s1" title="Manual">
         <a id="add_button" href="/hotels/new" class="btn-floating btn-large waves-effect waves-light red right"><i class="material-icons">add</i></a>
       </div>
-      
+
     </div>
 
 
@@ -66,11 +66,13 @@
     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
       markers = handler.addMarkers([
         <% @hotels.each do |hotel| %>
-        {
-          "lat": "<%= hotel.latitude %>",
-          "lng": "<%= hotel.longitude %>",
-          "infowindow": "<%= hotel.name %>"
-        },
+          <% unless hotel.latitude.nil? && hotel.longitude.nil? %>
+            {
+              "lat": "<%= hotel.latitude %>",
+              "lng": "<%= hotel.longitude %>",
+              "infowindow": "<%= hotel.name %>"
+            },
+          <% end %>
         <% end %>
       ]);
       handler.bounds.extendWith(markers);
