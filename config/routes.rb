@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'home#index'
+  root 'hotels#index'
   resources :hotels
   resources :ads
 
