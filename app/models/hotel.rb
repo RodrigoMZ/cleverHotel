@@ -48,7 +48,7 @@ class Hotel < ActiveRecord::Base
   validates :postcode, presence: true
   validates :price_from, presence: true, :numericality => {:allow_blank => true}
   validates :price_high_season, presence: true, :numericality => {:allow_blank => true}
-  validate :must_have_language
+  #validate :must_have_language
 
 
   def get_lat_long
