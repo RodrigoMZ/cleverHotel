@@ -1,7 +1,7 @@
 class AdsController < ApplicationController
   def index
   	@ads = []
-  	hotel = Hotel.first
+  	hotel = Hotel.find(params[:hotel])
 
   	ad = {
   		:text => "#{hotel.area_type} #{hotel.hotel_type} in #{hotel.city}",
