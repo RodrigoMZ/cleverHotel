@@ -61,4 +61,8 @@ class Hotel < ActiveRecord::Base
       self.errors.add(:languages, 'must have at least one language')
     end
   end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) { |row| Hotel.create!(row.to_hash) }
+  end
 end

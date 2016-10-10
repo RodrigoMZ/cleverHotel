@@ -1,6 +1,14 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+# Pick the frameworks you want:
+# require "action_controller/railtie"
+# require "action_mailer/railtie"
+# require "active_model/railtie"
+# require "action_view/railtie"
+# require "sprockets/railtie"
+# require "rails/test_unit/railtie"
+require "csv"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -22,5 +30,10 @@ module CleverHotel
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
+
+    # config.generators do |g|
+    #   g.orm :mongo_mapper
+    # end
   end
 end

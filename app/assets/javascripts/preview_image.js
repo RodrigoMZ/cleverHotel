@@ -9,7 +9,7 @@ function readURL(input) {
           img.attr("src", e.target.result);
           //dvPreview.append(img);
         }
-    }
+    };
 
     reader.readAsDataURL(input.files[0]);
   }
